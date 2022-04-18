@@ -19,7 +19,7 @@ module.exports.usersController = {
 
       const hash = await bcrypt.hash(password, Number(process.env.ROUNDS));
 
-      const user = await User.create({ login, password: hash });
+      const user = await User.create({ login, password: hash, name });
 
       res.json(user);
     } catch (err) {
