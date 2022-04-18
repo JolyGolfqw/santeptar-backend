@@ -10,17 +10,13 @@ const commentSchema = mongoose.Schema({
     ref: "User",
     type: mongoose.Schema.Types.ObjectId,
   },
-  book: {
+  books: {
     ref: "Book",
     type: mongoose.Schema.Types.ObjectId,
   },
   date: {
     type: Date,
     default: Date.now,
-  },
-  author: {
-    required: true,
-    type: String,
   },
 });
 

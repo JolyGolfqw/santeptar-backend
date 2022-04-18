@@ -1,11 +1,11 @@
 const { Router } = require("express");
 const { commentsController } = require("../controllers/comments.controller");
-
 const router = Router();
 
-router.post("/comments", commentsController.addCommentToBook);
+router.post("/comments", commentsController.addComment);
+router.patch("/comments/:id", commentsController.changeComment);
+router.delete("/comments/:id", commentsController.deleteComment);
 router.get("/comments", commentsController.getComments);
-router.delete("/comments/:id", commentsController.deleteCommentById);
-router.patch("/comments/:id", commentsController.editCommentById);
+
 
 module.exports = router;
