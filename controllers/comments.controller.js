@@ -43,6 +43,6 @@ module.exports.commentsController = {
       res.json(comments);
     } catch (err) {
       res.json("Операция не удалась");
-    }
+   
   },
 };
