@@ -11,7 +11,7 @@ const bookSchema = mongoose.Schema({
     required: true,
   },
 
-  discription: {
+  description: {
     type: String,
     required: true,
   },
@@ -35,8 +35,7 @@ const bookSchema = mongoose.Schema({
     },
   ],
 
-  book: {
-    //книги самого автора
+  author: {
     ref: "User",
     type: mongoose.Schema.Types.ObjectId,
   },

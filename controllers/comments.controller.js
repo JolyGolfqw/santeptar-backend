@@ -12,7 +12,7 @@ module.exports.commentsController = {
       });
       res.json("Комментарий отправлен!");
     } catch (err) {
-      res.json("Произошла ошибка при отправке комментария.");
+      res.json({error: err.message});
     }
   },
   changeComment: async (req, res) => {
@@ -26,7 +26,7 @@ module.exports.commentsController = {
       });
       res.json("Комментарий изменен!");
     } catch (err) {
-      res.json("Произошла ошибка при изменении комментария.");
+      res.json({error: err.message});
     }
   },
   deleteComment: async (req, res) => {
@@ -34,7 +34,7 @@ module.exports.commentsController = {
       await Comment.findByIdAndDelete(req.params.id);
       res.json("Комментарий удален!");
     } catch (err) {
-      res.json("Произошла ошибка при удалении комментария.");
+      res.json({error: err.message});
     }
   },
   getComments: async (req, res) => {
@@ -42,7 +42,7 @@ module.exports.commentsController = {
       const comments = await Comment.find();
       res.json(comments);
     } catch (err) {
-      res.json("Операция не удалась");
-   
+      res.json({error: err.message});
+    }
   },
 };

@@ -1,19 +1,18 @@
 const Book = require("../models/Book.model");
 
 module.exports.bookController = {
-  //! POST
   addBook: async (req, res) => {
-    const { img, title, discription, category, condition, likes, book } =
+    const { img, title, description, category, condition, likes, author } =
       req.body;
     try {
       const books = await Book.create({
         img,
         title,
-        discription,
+        description,
         category,
         condition,
         likes,
-        book,
+        author,
       });
 
       return res.json(books);
@@ -21,7 +20,7 @@ module.exports.bookController = {
       return res.json({ error: err.message });
     }
   },
-  //! GET
+
   getBooks: async (req, res) => {
     try {
       const book = await Book.find();
@@ -30,7 +29,7 @@ module.exports.bookController = {
       return res.json({ error: err.message });
     }
   },
-  //! DELETE
+
   deleteBookById: async (req, res) => {
     try {
       const book = await Book.findByIdAndRemove(req.params.id);
@@ -39,19 +38,17 @@ module.exports.bookController = {
       res.json({ error: err.message });
     }
   },
-  //! PATCH
+
   editBookById: async (req, res) => {
-    const { img, title, discription, category, condition, likes, book } =
+    const { img, title, description, category, condition } =
       req.body;
     try {
       const books = await Book.findByIdAndUpdate(req.params.id, {
         img,
         title,
-        discription,
+        description,
         category,
         condition,
-        likes,
-        book,
       });
       res.json(books);
     } catch (err) {
