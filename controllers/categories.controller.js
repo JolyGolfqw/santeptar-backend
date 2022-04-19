@@ -1,44 +1,22 @@
 const Category = require("../models/Category.model");
 
-module.exports.categoriesController = {
+module.exports.categoryController = {
   addCategory: async (req, res) => {
     try {
-      const category = await Category.create({
-        category: req.body.category,
+      await Category.create({
+        name: req.body.name,
       });
-
-      return res.json(category);
+      res.json("Категория добавлена");
     } catch (err) {
-      return res.json({ error: err.message });
+      res.json(err);
     }
   },
-
-  getCategories: async (req, res) => {
+  getCategory: async (req, res) => {
     try {
-      const categories = await Category.find();
-      return res.json(categories);
+      const find = await Category.find();
+      res.json(`${find} : Категории выведены.`);
     } catch (err) {
-      return res.json({ error: err.message });
-    }
-  },
-
-  deleteCategoryById: async (req, res) => {
-    try {
-      const categories = await Category.findByIdAndRemove(req.params.id);
-      res.json(categories);
-    } catch (err) {
-      res.json({ error: err.message });
-    }
-  },
-
-  editCategoryById: async (req, res) => {
-    try {
-      const categories = await Category.findByIdAndUpdate(req.params.id, {
-        category: req.body.category,
-      });
-      res.json(categories);
-    } catch (err) {
-      return res.json({ error: err.message });
+      res.json({error: err.message});
     }
   },
 };
