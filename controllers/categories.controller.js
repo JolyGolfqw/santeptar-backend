@@ -1,5 +1,3 @@
-// РИДВАН
-
 const Category = require("../models/Category.model");
 
 module.exports.categoryController = {
@@ -18,7 +16,7 @@ module.exports.categoryController = {
       const find = await Category.find();
       res.json(`${find} : Категории выведены.`);
     } catch (err) {
-      console.log(`${err} Ошибка при выводе категорий.`);
+      res.json({error: err.message});
     }
   },
 };
