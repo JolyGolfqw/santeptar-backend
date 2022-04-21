@@ -2,11 +2,11 @@ const Book = require("../models/Book.model");
 
 module.exports.bookController = {
   addBook: async (req, res) => {
-    const { img, title, description, category, condition, likes, author } =
+    const { title, description, category, condition, likes, author } =
       req.body;
     try {
       const books = await Book.create({
-        img,
+        img: req.file.path,
         title,
         description,
         category,

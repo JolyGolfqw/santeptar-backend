@@ -35,6 +35,7 @@ module.exports.categoriesController = {
     try {
       const categories = await Category.findByIdAndUpdate(req.params.id, {
         category: req.body.category,
+        image: req.body.image
       });
       res.json(categories);
     } catch (err) {
