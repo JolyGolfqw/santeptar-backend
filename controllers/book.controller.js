@@ -2,7 +2,7 @@ const Book = require("../models/Book.model");
 
 module.exports.bookController = {
   addBook: async (req, res) => {
-    const { title, description, category, condition, likes, author } =
+    const { title, description, category, condition, tags, author, mainCharacters, text } =
       req.body;
     try {
       const books = await Book.create({
@@ -11,10 +11,11 @@ module.exports.bookController = {
         description,
         category,
         condition,
-        likes,
+        tags,
         author,
+        text,
+        mainCharacters
       });
-
       return res.json(books);
     } catch (err) {
       return res.json({ error: err.message });

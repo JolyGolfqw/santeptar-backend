@@ -16,6 +16,10 @@ const bookSchema = mongoose.Schema({
     // required: true,
   },
 
+  text: {
+    type: String
+  },
+
   category: {
     ref: "Category",
     type: mongoose.Schema.Types.ObjectId,
@@ -41,6 +45,10 @@ const bookSchema = mongoose.Schema({
   },
 
   tags: [{
+    type: String
+  }],
+
+  mainCharacters: [{
     type: String
   }]
 });
