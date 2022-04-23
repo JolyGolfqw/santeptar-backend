@@ -48,7 +48,8 @@ module.exports.usersController = {
     const token = await jwt.sign(payload, process.env.SECRET, {
       expiresIn: "24h",
     });
-    res.json({ token, id: payload.id });
+    console.log(candidate.name)
+    res.json({ token, id: payload.id, name: candidate.name });
   },
 
   editProfile: async (req, res) => {
