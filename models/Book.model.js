@@ -50,7 +50,12 @@ const bookSchema = mongoose.Schema({
 
   mainCharacters: [{
     type: String
-  }]
+  }],
+
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 const Book = mongoose.model("Book", bookSchema);

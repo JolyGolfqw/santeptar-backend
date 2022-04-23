@@ -50,4 +50,28 @@ module.exports.usersController = {
     });
     res.json({ token, id: payload.id });
   },
+
+  editProfile: async (req, res) => {
+    try {
+     const user =  await User.findByIdAndUpdate(req.params.id, {
+        // avatar: req.file.path,
+        description: req.body.description
+      })
+      res.json(user)
+    } catch (err) {
+      res.json({error: 'Ошибка при изменении профиля'})
+    }
+  },
+
+  editAvatar: async (req, res) => {
+    try {
+     const user =  await User.findByIdAndUpdate(req.params.id, {
+        avatar: req.file.path,
+      })
+      res.json(user)
+    } catch (err) {
+      res.json({error: 'Ошибка при изменении профиля'})
+    }
+  }
 };
+
