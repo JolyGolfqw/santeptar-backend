@@ -24,7 +24,8 @@ module.exports.bookController = {
 
   getBooks: async (req, res) => {
     try {
-      const book = await Book.find();
+      const book = await Book.find()
+      .populate('author')
       return res.json(book);
     } catch (err) {
       return res.json({ error: err.message });

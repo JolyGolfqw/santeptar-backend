@@ -49,7 +49,7 @@ module.exports.usersController = {
       expiresIn: "24h",
     });
     console.log(candidate.name)
-    res.json({ token, id: payload.id, name: candidate.name });
+    res.json({ token, id: payload.id, name: candidate.name, avatar: candidate.avatar });
   },
 
   editProfile: async (req, res) => {
@@ -72,6 +72,32 @@ module.exports.usersController = {
       res.json(user)
     } catch (err) {
       res.json({error: 'Ошибка при изменении профиля'})
+    }
+  },
+
+  follow: async (req, res) => {
+    try {
+     const user =  await User.findByIdAndUpdate(req.params.id, {
+       $push: {
+        followers: req.body.followers
+       }
+      })
+      res.json(user)
+    } catch (err) {
+      res.json({error: 'Ошибка при подписке'})
+    }
+  },
+
+  unfollow: async (req, res) => {
+    try {
+     const user =  await User.findByIdAndUpdate(req.params.id, {
+       $pull: {
+        followers: req.body.followers
+       }
+      })
+      res.json(user)
+    } catch (err) {
+      res.json({error: 'Ошибка при отписке'})
     }
   }
 };
