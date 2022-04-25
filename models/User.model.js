@@ -4,7 +4,7 @@ const userSchema = mongoose.Schema({
   avatar: {
     type: String,
     default:
-      "images\\kisspng-avatar-user-computer-icons-software-developer-5b327cc98b5780.5684824215300354015708.jpg",
+      "images\\user.png",
   },
   name: { type: String, required: true },
   login: {
