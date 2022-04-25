@@ -57,4 +57,42 @@ module.exports.bookController = {
       res.json({ error: err.message });
     }
   },
+
+  like: async (req, res) => {
+    try {
+     const book =  await Book.findByIdAndUpdate(req.params.id, {
+       $push: {
+        likes: req.body.likes
+       }
+      })
+      res.json(book)
+    } catch (err) {
+      res.json({error: 'Ошибка при попытке добавить в избранное'})
+    }
+  },
+
+  unLike: async (req, res) => {
+    try {
+     const book =  await Book.findByIdAndUpdate(req.params.id, {
+       $pull: {
+        likes: req.body.likes
+       }
+      })
+      res.json(book)
+    } catch (err) {
+      res.json({error: 'Ошибка при удалении из избранного'})
+    }
+  },
+
+  continueBook: async (req, res) => {
+    try {
+     const book =  await Book.findByIdAndUpdate(req.params.id, {
+        text: req.body.text
+      })
+      res.json(book)
+    } catch (err) {
+      res.json({error: 'Ошибка при изменении текста книги'})
+    }
+  },
 };
+

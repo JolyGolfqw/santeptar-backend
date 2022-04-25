@@ -6,7 +6,7 @@ require("dotenv").config();
 module.exports.usersController = {
   getUsers: async (req, res) => {
     try {
-      const users = await User.find();
+      const users = await User.find()
       res.json(users);
     } catch (err) {
       res.json({ error: err.message });
@@ -66,9 +66,10 @@ module.exports.usersController = {
 
   editAvatar: async (req, res) => {
     try {
-     const user =  await User.findByIdAndUpdate(req.params.id, {
+      await User.findByIdAndUpdate(req.params.id, {
         avatar: req.file.path,
       })
+      const user = await User.findById(req.params.id)
       res.json(user)
     } catch (err) {
       res.json({error: 'Ошибка при изменении профиля'})
@@ -77,11 +78,12 @@ module.exports.usersController = {
 
   follow: async (req, res) => {
     try {
-     const user =  await User.findByIdAndUpdate(req.params.id, {
+     await User.findByIdAndUpdate(req.params.id, {
        $push: {
         followers: req.body.followers
        }
       })
+      const user = await User.findById(req.params.id)
       res.json(user)
     } catch (err) {
       res.json({error: 'Ошибка при подписке'})
@@ -90,11 +92,12 @@ module.exports.usersController = {
 
   unfollow: async (req, res) => {
     try {
-     const user =  await User.findByIdAndUpdate(req.params.id, {
+     await User.findByIdAndUpdate(req.params.id, {
        $pull: {
         followers: req.body.followers
        }
       })
+      const user = await User.findById(req.params.id)
       res.json(user)
     } catch (err) {
       res.json({error: 'Ошибка при отписке'})
