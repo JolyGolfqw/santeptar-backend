@@ -3,33 +3,32 @@ const mongoose = require("mongoose");
 const bookSchema = mongoose.Schema({
   img: {
     type: String,
-    // required: true,
+    required: true,
   },
 
   title: {
     type: String,
-    // required: true,
+    required: true,
   },
 
   description: {
     type: String,
-    // required: true,
+    required: true,
   },
 
   text: {
-    type: String
+    type: String,
   },
 
   category: {
     ref: "Category",
     type: mongoose.Schema.Types.ObjectId,
-    // required: true,
+    required: true,
   },
 
   condition: {
     default: false,
     type: Boolean,
-    // required: true,
   },
 
   likes: [
@@ -44,18 +43,22 @@ const bookSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
   },
 
-  tags: [{
-    type: String
-  }],
+  tags: [
+    {
+      type: String,
+    },
+  ],
 
-  mainCharacters: [{
-    type: String
-  }],
+  mainCharacters: [
+    {
+      type: String,
+    },
+  ],
 
   date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 const Book = mongoose.model("Book", bookSchema);
