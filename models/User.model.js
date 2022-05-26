@@ -3,10 +3,11 @@ const mongoose = require("mongoose");
 const userSchema = mongoose.Schema({
   avatar: {
     type: String,
-    default:
-      "images\\user.png",
+    default: "images\\user.png",
   },
+
   name: { type: String, required: true },
+
   login: {
     type: String,
     unique: true,

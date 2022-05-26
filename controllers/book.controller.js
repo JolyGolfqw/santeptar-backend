@@ -2,8 +2,16 @@ const Book = require("../models/Book.model");
 
 module.exports.bookController = {
   addBook: async (req, res) => {
-    const { title, description, category, condition, tags, author, mainCharacters, text } =
-      req.body;
+    const {
+      title,
+      description,
+      category,
+      condition,
+      tags,
+      author,
+      mainCharacters,
+      text,
+    } = req.body;
     try {
       const books = await Book.create({
         img: req.file.path,
@@ -14,7 +22,7 @@ module.exports.bookController = {
         tags,
         author,
         text,
-        mainCharacters
+        mainCharacters,
       });
       return res.json(books);
     } catch (err) {
@@ -24,8 +32,7 @@ module.exports.bookController = {
 
   getBooks: async (req, res) => {
     try {
-      const book = await Book.find()
-      .populate('author')
+      const book = await Book.find().populate("author");
       return res.json(book);
     } catch (err) {
       return res.json({ error: err.message });
@@ -42,8 +49,7 @@ module.exports.bookController = {
   },
 
   editBookById: async (req, res) => {
-    const { img, title, description, category, condition } =
-      req.body;
+    const { img, title, description, category, condition } = req.body;
     try {
       const books = await Book.findByIdAndUpdate(req.params.id, {
         img,
@@ -60,39 +66,38 @@ module.exports.bookController = {
 
   like: async (req, res) => {
     try {
-     const book =  await Book.findByIdAndUpdate(req.params.id, {
-       $push: {
-        likes: req.body.likes
-       }
-      })
-      res.json(book)
+      const book = await Book.findByIdAndUpdate(req.params.id, {
+        $push: {
+          likes: req.body.likes,
+        },
+      });
+      res.json(book);
     } catch (err) {
-      res.json({error: 'Ошибка при попытке добавить в избранное'})
+      res.json({ error: err.message });
     }
   },
 
   unLike: async (req, res) => {
     try {
-     const book =  await Book.findByIdAndUpdate(req.params.id, {
-       $pull: {
-        likes: req.body.likes
-       }
-      })
-      res.json(book)
+      const book = await Book.findByIdAndUpdate(req.params.id, {
+        $pull: {
+          likes: req.body.likes,
+        },
+      });
+      res.json(book);
     } catch (err) {
-      res.json({error: 'Ошибка при удалении из избранного'})
+      res.json({ error: err.message });
     }
   },
 
   continueBook: async (req, res) => {
     try {
-     const book =  await Book.findByIdAndUpdate(req.params.id, {
-        text: req.body.text
-      })
-      res.json(book)
+      const book = await Book.findByIdAndUpdate(req.params.id, {
+        text: req.body.text,
+      });
+      res.json(book);
     } catch (err) {
-      res.json({error: 'Ошибка при изменении текста книги'})
+      res.json({ error: err.message });
     }
   },
 };
-
